@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<head>
+    <meta name="viewport" content="width=device-width, intitial-scale=1.0">
+    <link rel="stylesheet" href="/styles/style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="search-bar">
+            <button class="search-icon">
+                🔍 
+            </button>
+            <input type="text" placeholder="Search" id="search">
+        </div>
+
+        <div class="dropdown">
+            <button class="dropdown-btn">Search Type ▼</button>
+            <div class="dropdown-content">
+                <a href="#">Tutor</a>
+                <a href="#">Subject</a>
+                <a href="#">Course</a>
+                <a href="#">Date</a>
+            </div>
+        </div>
+        <div class="add-bar">
+            <button class="search-icon">
+                + 
+            </button>
+            <input type="text" placeholder="Add" id="search">
+        </div>
+
+        <div class="dropdown">
+            <button class="dropdown-btn">Add Type ▼</button>
+            <div class="dropdown-content">
+                <a href="#">Tutor</a>
+                <a href="#">Appointment</a>
+                <a href="#">Course</a>
+            </div>
+        </div>
+    </nav>
+    <h1 id="frontpagetitle">Welcome to the CT Center</h1>
+    <div id="frontpagelisttutors">
+        <h2>List of Tutors</h2>
+        <div id="tutors-container"></div>
+    </div>
+    <script src="/scripts/index.js"></script>
+</body>
