@@ -30,6 +30,7 @@
 
 .dropdown {
     position: relative;
+    margin-left: 10px;
 }
 
 .dropdown-btn {
