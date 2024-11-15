@@ -3,7 +3,12 @@
 //fetch data from api and display it 
 document.addEventListener('DOMContentLoaded', () => {
     fetchTutors();
-})
+
+    //close overlay when close button is clicked
+    document.getElementById('close-overlay-btn').addEventListener('click', () => {
+        document.getElementById('tutor-overlay').style.display = 'none';
+    });
+});
 
 //use tutor model to interact w/ mongodb
 async function fetchTutors() {
@@ -60,6 +65,10 @@ function displayTutors(tutors) {
             const result = await removeTutor(tutor.name, tutorDiv);
         })
 
+        tutorDiv.addEventListener('click', () => {
+            showTutorOverlay(tutor);
+        });
+
         tutorDiv.appendChild(deleteBtn);
         container.appendChild(tutorDiv);
     });
@@ -88,3 +97,15 @@ async function removeTutor(name, tutorDiv) {
     }
 }
 
+function showTutorOverlay(tutor) {
+    document.getElementById('overlay-tutor-name').textContent = tutor.name;
+    document.getElementById('overlay-tutor-details').innerHTML = `
+        <p>Primary Subject: ${tutor.primSubj}</p>
+        <p>Secondary Subject: ${tutor.secSubj}</p>
+        <p>Courses: ${tutor.courses.join(', ')}</p>
+        <p>Email: ${tutor.email}</p>
+        <p>AND MOREEEEEEEE</p>
+    `;
+
+    document.getElementById('tutor-overlay').style.display = 'block';
+}

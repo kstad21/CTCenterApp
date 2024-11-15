@@ -146,3 +146,36 @@ input {
 label {
     padding: 1px;
 }
+
+#tutor-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f1f1f1;
+    display: none;
+    z-index: 1000;
+    overflow: auto;
+    padding-top: 60px; /* avoid covering nav bar? */
+}
+
+#tutor-overlay-content {
+    margin: auto;
+    padding: 20px;
+    background-color: #ffffff;
+    max-width: 600px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#close-overlay-btn {
+    float: right;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+#tutors-container {
+    cursor: pointer;
+}

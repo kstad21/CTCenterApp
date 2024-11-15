@@ -26,8 +26,8 @@ app.listen(port, () => {
 /*
 Notes: 
 - make the list of tutors clickable (instead of just searching) and then JUST show that
-  one tutors info 
-- MODIFY a tutor; and what if i try to add a tutor that's already there? same w/ courses.
+  one tutor's info 
+- x**x MODIFY a tutor; and what if i try to add a tutor that's already there? x**x same w/ courses.
 - display <today's> appts on the front page, add appt, search appt, appt schema, appt endpoint
 - ^ in this vein, make sure that tutors can have arrays of the appt schemas? and the course 
   ones too maybe? 
