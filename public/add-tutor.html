@@ -1,0 +1,93 @@
+<!-- public/add-tutor.html -->
+
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Tutor(s)</title>
+    <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <div class="home-btn">
+                <a href="index.html">
+                    <button class="home-icon">🏠</button>
+                </a>
+            </div>
+            <div class="search-bar">
+                <button class="search-icon">
+                    🔍 
+                </button>
+                <input type="text" placeholder="Search" id="search">
+                <div class="dropdown">
+                    <button class="dropdown-btn">Search Type ▼</button>
+                    <div class="dropdown-content">
+                        <a href="#">Tutor</a>
+                        <a href="#">Subject</a>
+                        <a href="#">Course</a>
+                        <a href="#">Date</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="dropdown">
+            <button class="dropdown-btn">Add Type ▼</button>
+            <div class="dropdown-content">
+                <a href="add-tutor.html">Tutor</a>
+                <a href="#">Appointment</a>
+                <a href="#">Course</a>
+            </div>
+        </div>
+    </nav>
+    <h1>Add a tutor:</h1>
+    <button id="add-tutor-form-container-btn">+</button>
+    <button id="sub-tutor-form-container-btn">-</button>
+    <div id="add-tutor-form-container">
+        <form id="add-tutor-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+    
+            <label for="primSubj">Primary subject:</label>
+            <input type="text" id="primSubj" name="primSubj" required>
+    
+            <label for="secSubj">Secondary subject (if applicable):</label>
+            <input type="text" id="secSubj" name="secSubj">
+    
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email">
+    
+            <label for="courses">Courses (comma-separated no spaces):</label>
+            <input type="text" id="courses" name="courses" required>
+    
+            <button type="submit">Add tutor</button>
+        </form>
+    </div>
+
+    <script src="/scripts/add-tutor.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('add-tutor-form-container-btn').addEventListener('click', function() {
+                const formContainer = document.getElementById('add-tutor-form-container');
+                
+                const newForm = document.getElementById('add-tutor-form').cloneNode(true);
+                const inputs = newForm.querySelectorAll('input, select');
+                inputs.forEach(input => input.value = '');
+
+                formContainer.appendChild(newForm);
+            });
+
+            document.getElementById('sub-tutor-form-container-btn').addEventListener('click', function() {
+                const formContainer = document.getElementById('add-tutor-form-container');
+
+                const forms = formContainer.children;
+
+                if (forms.length > 1) {
+                    const lastForm = forms[forms.length - 1];
+                    lastForm.remove();
+                }
+            });
+        });
+    </script>
+</body>

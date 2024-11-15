@@ -1,3 +1,5 @@
+/* public/styles/style.css */
+
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -5,6 +7,20 @@
     padding: 10px 20px;
     background-color: #333;
     color: white;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.home-btn {
+    font-size: 1.5em;
+    border: none;
+    border-radius: 0px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .search-bar {
@@ -17,7 +33,6 @@
     border: none;
     color: white;
     font-size: 20px;
-    cursor: pointer;
     margin-right: 10px;
 }
 
@@ -28,16 +43,26 @@
     border-radius: 5px;
 }
 
+.dropdown-left {
+    display: flex;
+    align-items: left;
+}
+
 .dropdown {
-    position: relative;
-    margin-left: 10px;
+    align-self: center;
+    margin: auto 0;
 }
 
 .dropdown-btn {
     background-color:rgb(61, 77, 255);
+    min-width: 40px;
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipses;
     color: white;
     padding: 10px;
-    font-size: 16px;
+    font-size: 14px;
     border: none;
     cursor: pointer;
     border-radius: 5px;
@@ -81,4 +106,43 @@
     height: 50vh;
     margin-left: 2%;
     margin-right: 2%;
+}
+
+#add-tutor-form-container {
+    display:flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+#add-tutor-form-container form {
+    flex: 1 1 30%;
+    box-sizing: border-box;
+    max-width: 40%;
+}
+
+#add-tutor-form {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+input, select {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+}
+
+input {
+    margin: auto;
+    max-width: 90%;
+}
+
+label {
+    padding: 1px;
 }
