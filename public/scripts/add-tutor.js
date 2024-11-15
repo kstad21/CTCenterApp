@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (response.ok) {
-                alert("Tutor added successfully!");
+                alert("Tutor added/updated successfully!");
 
                 //check if other forms 
                 if (forms.length > 1) {
@@ -34,11 +34,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     form.reset();
                 }
             } else {
-                alert("Failed to add tutor.");
+                alert("Failed to add/update tutor.");
             }
         } catch (error) {
             console.error("Error", error);
-            alert("An error occured while adding the tutor.");
+            alert("An error occured while adding/updating the tutor.");
         }
     });
 

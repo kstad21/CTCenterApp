@@ -32,15 +32,29 @@ router.get('/find', async (req, res) => {
 // add a tutor
 router.post('/addtutor', async (req, res) => {
     try {
-        const newTutor = new Tutor({
-            name: req.body.name,
-            primSubj: req.body.primSubj,
-            secSubj: req.body.secSubj,
-            email: req.body.email,
-            courses: req.body.courses || []
-        });
-        const savedTutor = await newTutor.save();
-        res.status(201).json(savedTutor);
+        const { name, primSubj, secSubj, email, courses } = req.body;
+
+        const existingTutor = await Tutor.findOne({ name: new RegExp(`^${name}$`, 'i') });
+
+        if (existingTutor) {
+            // update existing tutor
+            existingTutor.primSubj = primSubj;
+            existingTutor.secSubj = secSubj;
+            existingTutor.email = email;
+            existingTutor.courses = courses || [];
+            const updatedTutor = await existingTutor.save();
+            return res.status(200).json({ message: "Tutor updated successfully", tutor: updatedTutor });
+        } else {
+            const newTutor = new Tutor({
+                name,
+                primSubj,
+                secSubj,
+                email,
+                courses: courses || []
+            });
+            const savedTutor = await newTutor.save();
+            return res.status(201).json({ message: "Tutor added successfully", tutor: savedTutor });
+        }
     } catch (error) {
         console.error("Error in add tutor route:", error);
         res.status(500).json({ error: "Failed to add tutor" });
