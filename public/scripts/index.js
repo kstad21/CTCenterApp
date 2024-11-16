@@ -61,7 +61,8 @@ function displayTutors(tutors) {
             tutorDiv.style.backgroundColor = '#FFFFFF';
         })
 
-        deleteBtn.addEventListener('click', async () => {
+        deleteBtn.addEventListener('click', async (event) => {
+            event.stopPropagation();
             const result = await removeTutor(tutor.name, tutorDiv);
         })
 

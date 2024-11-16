@@ -147,7 +147,7 @@ label {
     padding: 1px;
 }
 
-#tutor-overlay {
+#tutor-overlay, #course-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -160,7 +160,7 @@ label {
     padding-top: 60px; /* avoid covering nav bar? */
 }
 
-#tutor-overlay-content {
+#tutor-overlay-content, #course-overlay-content {
     margin: auto;
     padding: 20px;
     background-color: #ffffff;
@@ -176,6 +176,6 @@ label {
     padding: 5px;
 }
 
-#tutors-container {
+#tutors-container, #courses-container {
     cursor: pointer;
 }
