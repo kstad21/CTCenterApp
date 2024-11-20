@@ -77,4 +77,16 @@ router.delete('/remtutor', async (req, res) => {
     }
 });
 
+router.put('/update', async (req, res) => {
+    const updatedTutor = req.body;
+    console.log("inside api, ", req.body);
+
+    try {
+        await Tutor.updateOne({_id: updatedTutor._id}, updatedTutor);
+        res.status(200).json({ message: 'Tutor updated successfully!' });
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to update tutor' });
+    }
+}); 
+
 module.exports = router;

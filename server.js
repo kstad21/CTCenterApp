@@ -5,6 +5,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const tutorRoutes = require('./routers/tutors');
 const courseRoutes = require('./routers/courses');
+const appointmentRoutes = require('./routers/appointments');
 
 const app = express();
 app.use(express.static('public'));
@@ -12,6 +13,7 @@ app.use(express.json());
 
 app.use('/api/tutors', tutorRoutes);
 app.use('/api/courses', courseRoutes);
+app.use('/api/appointments', appointmentRoutes);
 
 const port = 5038;
 const uri = process.env.MONGODB_URI;

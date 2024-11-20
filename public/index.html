@@ -38,12 +38,27 @@
         <h2>List of Tutors</h2>
         <div id="tutors-container"></div>
     </div>
-    <div id="tutor-overlay">
-        <div id="tutor-overlay-content">
-            <span id="close-overlay-btn">&times;</span>
-            <h2 id="overlay-tutor-name"></h2>
-            <p id="overlay-tutor-details"></p>
+    <div id="tutor-overlay" class="overlay">
+        <div id="tutor-overlay-content" class="overlay-content">
+            <span id="close-overlay-tutor" class="close-overlay-btn">&times;</span>
+            <div id="overlay-tutor-details"></div>
+        </div>
+    </div>
+    <h2>Today is:</h2>
+    <div id="display-date">Today:</div>
+
+    <div id="frontpagelistappts">
+        <h2>Appointments</h2>
+        <div id="appts-container"></div>
+    </div>
+    
+    <div id="appt-overlay" class="overlay">
+        <div id="appt-overlay-content" class="overlay-content">
+            <span id="close-overlay-appt" class="close-overlay-btn">&times;</span>
+            <h2 id="overlay-appt-start-end"></h2>
+            <p id="overlay-appt-details"></p>
         </div>
     </div>
     <script src="/scripts/index.js"></script>
+    
 </body>

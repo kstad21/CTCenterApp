@@ -147,7 +147,7 @@ label {
     padding: 1px;
 }
 
-#tutor-overlay, #course-overlay {
+.overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -160,22 +160,35 @@ label {
     padding-top: 60px; /* avoid covering nav bar? */
 }
 
-#tutor-overlay-content, #course-overlay-content {
+.overlay-content{
     margin: auto;
     padding: 20px;
     background-color: #ffffff;
     max-width: 600px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
 }
 
-#close-overlay-btn {
-    float: right;
-    font-size: 24px;
+#overlay-tutor-details {
+    margin-left: 2%;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+}
+
+.close-overlay-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    color: rgb(127, 127, 127);
     cursor: pointer;
-    padding: 5px;
 }
 
-#tutors-container, #courses-container {
+#tutors-container, #courses-container, #appts-container {
     cursor: pointer;
 }
