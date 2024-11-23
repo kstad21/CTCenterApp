@@ -144,9 +144,8 @@ function displayAppointments(appointments) {
 
         deleteBtn.addEventListener('click', async (event) => {
             event.stopPropagation();
-            /* TO DO 
-            const result = await removeAppointment();
-            */
+            
+            await removeAppt(appt, appointmentDiv);
         })
 
         appointmentDiv.addEventListener('click', () => {
@@ -310,3 +309,26 @@ function displayDate(date) {
         <p>${dateString}</p>
     `
 } 
+
+async function removeAppt(appt, apptDiv) {
+    try {
+        const response = await fetch("/api/appointments/remove", {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ id: appt._id, tutor: appt.tutor })
+        });
+
+        if (response.ok) {
+            alert(`Appt for tutor ${ appt.tutor } deleted successfully!`);
+            apptDiv.remove();
+        } else {
+            const errorData = await response.json();
+            alert(errorData.error);
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        alert("An error occurred while removing the appt.");
+    }
+}

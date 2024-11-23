@@ -14,5 +14,20 @@ router.get('/', async (req, res) => {
     }
 });
 
+// remove an appt
+router.delete('/remove', async (req, res) => {
+    const { id, tutor } = req.body;
+    try {
+        const result = await Appointment.deleteOne( {_id: id});
+        if (result.deletedCount > 0) {
+            res.status(200).json({ message: `Appointment for ${ tutor } successfully deleted.`});
+        } else {
+            res.status(404).json({ error: 'no tutor found!'});
+        }
+    } catch (error) {
+        res.status(500).json({ error: "Failed to remove appointment" });
+    }
+});
+
 module.exports = router;
 

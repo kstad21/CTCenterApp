@@ -16,8 +16,8 @@ document.getElementById('add-course-form').addEventListener('submit', async func
     const courses = courseInput.split(",").map(course => course.trim());
     //check for duplicates
 
-    const uniqueCourses = [];
-    const duplicatesFound = false;
+    let uniqueCourses = [];
+    let duplicatesFound = false;
     courses.forEach(course => {
         if (!uniqueCourses.includes(course)) {
             uniqueCourses.push(course);

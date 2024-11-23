@@ -31,6 +31,8 @@ Notes:
   one tutor's info x**X
 - x**x make sure overlay doesn't come up when the delete btn is clicked. x**x
 - x**x MODIFY a tutor; and what if i try to add a tutor that's already there? x**x same w/ courses.
+- implement add appts page
+- debateably add a check that appts have a valid tutor, course, etc 
 - display <today's> appts on the front page, add appt, search appt, appt schema, appt endpoint
 - ^ in this vein, make sure that tutors can have arrays of the appt schemas? and the course 
   ones too maybe? 
