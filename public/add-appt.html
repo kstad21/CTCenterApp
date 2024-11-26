@@ -1,0 +1,95 @@
+<!-- public/add-appt.html -->
+
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Tutor(s)</title>
+    <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <div class="home-btn">
+                <a href="index.html">
+                    <button class="home-icon">🏠</button>
+                </a>
+            </div>
+            <div class="search-bar">
+                <button class="search-icon">
+                    🔍 
+                </button>
+                <input type="text" placeholder="Search" id="search">
+                <div class="dropdown">
+                    <button class="dropdown-btn">Search Type ▼</button>
+                    <div class="dropdown-content">
+                        <a href="#">Tutor</a>
+                        <a href="#">Subject</a>
+                        <a href="#">Course</a>
+                        <a href="#">Date</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="dropdown">
+            <button class="dropdown-btn">Add/Update ▼</button>
+            <div class="dropdown-content">
+                <a href="add-tutor.html">Tutor</a>
+                <a href="#">Appointment</a>
+                <a href="add-course.html">Course</a>
+            </div>
+        </div>
+    </nav>
+    <h1>Add an appointment:</h1>
+    <button id="add-appt-form-container-btn">+</button>
+    <button id="sub-appt-form-container-btn">-</button>
+    <div id="add-appt-form-container">
+        <form id="add-appt-form">
+            <label for="tutor">Name:</label>
+            <input type="text" id="tutor" name="tutor" required>
+
+            <label for="subject">Subject (if applicable):</label>
+            <input type="text" id="subject" name="subject">
+
+            <label for="startTime">Start time (military):</label>
+            <input type="text" id="startTime" name="startTime" required>
+
+            <label for="endTime">End time (military):</label>
+            <input type="text" id="endTime" name="endTime" required>
+
+            <label for="scholarAthlete">Scholar Athlete? (y/n):</label>
+            <input type="text" id="scholarAthlete" name="scholarAthlete">
+
+            <button type="submit">Add appointment</button>
+        </form>
+    </div>
+
+    
+
+    <script src="/scripts/add-appt.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('add-appt-form-container-btn').addEventListener('click', function() {
+                const formContainer = document.getElementById('add-appt-form-container');
+
+                const newForm = document.getElementById('add-appt-form').cloneNode(true);
+                const inputs = newForm.querySelectorAll('input, select');
+                inputs.forEach(input => input.value = '');
+
+                formContainer.appendChild(newForm);
+            });
+        });
+
+        document.getElementById('sub-appt-form-container-btn').addEventListener('click', function() {
+            const formContainer = document.getElementById('add-appt-form-container');
+
+            const forms = formContainer.children;
+
+            if (forms.length > 1) {
+                const lastForm = forms[forms.length-1];
+                lastForm.remove();
+            }
+        });
+    </script>
+</body>

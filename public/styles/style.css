@@ -108,19 +108,19 @@
     margin-right: 2%;
 }
 
-#add-tutor-form-container {
+#add-tutor-form-container, #add-appt-form-container {
     display:flex;
     flex-wrap: wrap;
     gap: 5px;
 }
 
-#add-tutor-form-container form {
+#add-tutor-form-container form, #add-appt-form-container form {
     flex: 1 1 30%;
     box-sizing: border-box;
     max-width: 40%;
 }
 
-#add-tutor-form {
+#add-tutor-form, #add-appt-form {
     display: flex;
     flex-direction: column;
     margin: auto;
