@@ -31,6 +31,7 @@ Notes:
   one tutor's info x**X
 - x**x make sure overlay doesn't come up when the delete btn is clicked. x**x
 - x**x MODIFY a tutor; and what if i try to add a tutor that's already there? x**x same w/ courses.
+- x**x make course attribute --> course model for tutor addition x**x
 - implement add appts page
 - debateably add a check that appts have a valid tutor, course, etc 
 - display <today's> appts on the front page, add appt, search appt, appt schema, appt endpoint
