@@ -3,11 +3,12 @@
 const express = require('express');
 const Tutor = require('../models/Tutor');
 const router = express.Router();
+const Course = require('../models/Course');
 
 //api endpoint to get all tutors
 router.get('/', async (req, res) => {
     try {
-        const tutors = await Tutor.find();
+        const tutors = await Tutor.find().populate('courses');
         res.json(tutors);
     } catch (error) {
         res.status(500).json({ error: "Failed to retrieve tutors" });
@@ -34,6 +35,29 @@ router.post('/addtutor', async (req, res) => {
     try {
         const { name, primSubj, secSubj, email, courses } = req.body;
 
+        console.log("courses received: " + courses);
+        let courseInput = courses.split(", ").map((name => name.trim()));
+
+        const courseIds = [];
+
+        if (Array.isArray(courseInput)) {
+            console.log("inside Array.isArray (43)");
+            for (const courseName of courseInput) {
+                console.log("current courseName: " + courseName);
+                console.log("inside for loop for courses");
+                let course = await Course.findOne({ name: new RegExp(`^${courseName}$`, 'i') });
+
+                if (!course) {
+                    console.log("inside tutors.js, inside !course, should be creating one.");
+                    //create course if it doesnt exist
+                    course = new Course({ name: courseName, subject: courseName.split(" ")[0], code: courseName.split(" ")[1] });
+                    await course.save();
+                }
+
+                courseIds.push(course._id);
+            }
+        }
+
         const existingTutor = await Tutor.findOne({ name: new RegExp(`^${name}$`, 'i') });
 
         if (existingTutor) {
@@ -41,7 +65,7 @@ router.post('/addtutor', async (req, res) => {
             existingTutor.primSubj = primSubj;
             existingTutor.secSubj = secSubj;
             existingTutor.email = email;
-            existingTutor.courses = courses || [];
+            existingTutor.courses = courseIds;
             const updatedTutor = await existingTutor.save();
             return res.status(200).json({ message: "Tutor updated successfully", tutor: updatedTutor });
         } else {
@@ -50,7 +74,7 @@ router.post('/addtutor', async (req, res) => {
                 primSubj,
                 secSubj,
                 email,
-                courses: courses || []
+                courses: courseIds
             });
             const savedTutor = await newTutor.save();
             return res.status(201).json({ message: "Tutor added successfully", tutor: savedTutor });

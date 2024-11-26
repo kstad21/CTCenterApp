@@ -8,12 +8,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const form = e.target;
         const forms = formContainer.children;
         const formData = new FormData(form);
-
+        
         //collect formData into an object
         const formObj = {};
         formData.forEach((value, key) => {
             formObj[key] = value;
         });
+
+        console.log("inside add-tutor.js, formData: " + JSON.stringify(formObj));
 
         try {
             const response = await fetch("/api/tutors/addtutor", {

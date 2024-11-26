@@ -8,7 +8,7 @@ const tutorSchema = new mongoose.Schema({
     primSubj: {type: String, required: true},
     secSubj: {type: String, required: false}, 
     email: {type: String, required: false},
-    courses: {type: [String], default: [], required: true},
+    courses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' }],
     observations: { type: [String], default: [] }
 });
 

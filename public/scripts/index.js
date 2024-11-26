@@ -63,12 +63,17 @@ function displayTutors(tutors) {
     }
 
     tutors.forEach(tutor => {
+        console.log("HERE");
         //create div for each tutor
         const tutorDiv = document.createElement('div');
         tutorDiv.classList.add('tutor');
 
         const tutorInfo = document.createElement('span');
-        let infoText = `${tutor.name}: Primary Subject: ${tutor.primSubj} | Secondary Subject: ${tutor.secSubj} | Courses: ${tutor.courses.join(', ')}`;
+
+        console.log(tutor.courses);
+        const courseNames = tutor.courses.map(course => course.name).join(', ');
+        let infoText = `${tutor.name}: Primary Subject: ${tutor.primSubj} | Secondary Subject: ${tutor.secSubj} | Courses: ${courseNames}`;
+
         if (tutor.email.length > 0) {
             infoText += ` | Email: ${tutor.email}`;
         }
