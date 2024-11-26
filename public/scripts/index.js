@@ -128,7 +128,7 @@ function displayAppointments(appointments) {
 
         const apptInfo = document.createElement('span');
         //apptInfo.textContent = `Tutor: ${appt.tutor} | Subject: ${appt.subject} | ${(parseDate(appt.startTime)).split(" (")[0]}-${((parseDate(appt.endTime)).split(" (")[0]).split(": ")[1]} | Mode: ${appt.mode}`;
-        apptInfo.textContent = `Tutor: ${appt.tutor} | Subject: ${appt.subject} | ${appt.startTime}-${appt.endTime} | Mode: ${appt.mode}`;
+        apptInfo.textContent = `Tutor: ${appt.tutor} | Subject: ${appt.subject} | ${parseDate(appt.startTime.toString())}-${parseDate(appt.endTime.toString())} | Mode: ${appt.mode}`;
         appointmentDiv.appendChild(apptInfo);
 
         //create delete button for this appointment
@@ -291,7 +291,7 @@ function showAppointmentOverlay(appointment) {
 
 function parseDate(date) {
     // "2024-04-07T14:22:40Z"
-    console.log(date);
+    console.log("trying to parse: " + date);
     const months = ["Jan", "Feb", "March", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
     const dateParts = date.split("-");
     const year = dateParts[0];
@@ -300,7 +300,9 @@ function parseDate(date) {
     const day = daytime[0];
     const time = daytime[1].substring(0, daytime[1].length - 8);
 
-    return months[parseInt(month) - 1] + " " + day + ": " + time + " (" + year + ")";
+    const toReturn = months[parseInt(month) - 1] + " " + day + ": " + time + " (" + year + ")";
+    console.log("set to return: " + toReturn);
+    return toReturn;
     // Apr, 07: 14:22 (2024)
 }
 
