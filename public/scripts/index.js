@@ -48,7 +48,7 @@ async function fetchAppts() {
         console.log(appointments);
         displayAppointments(appointments);
     } catch (error) {
-        console.log("Error retrieving tutors:", error);
+        console.log("Error retrieving appointments:", error);
         document.getElementById('appts-container').innerHTML = '<p>Error loading appointments</p>';
     }
 }
@@ -127,7 +127,8 @@ function displayAppointments(appointments) {
         appointmentDiv.classList.add('appointment');
 
         const apptInfo = document.createElement('span');
-        apptInfo.textContent = `Tutor: ${appt.tutor} | Subject: ${appt.subject} | ${(parseDate(appt.startTime)).split(" (")[0]}-${((parseDate(appt.endTime)).split(" (")[0]).split(": ")[1]} | Mode: ${appt.mode}`;
+        //apptInfo.textContent = `Tutor: ${appt.tutor} | Subject: ${appt.subject} | ${(parseDate(appt.startTime)).split(" (")[0]}-${((parseDate(appt.endTime)).split(" (")[0]).split(": ")[1]} | Mode: ${appt.mode}`;
+        apptInfo.textContent = `Tutor: ${appt.tutor} | Subject: ${appt.subject} | ${appt.startTime}-${appt.endTime} | Mode: ${appt.mode}`;
         appointmentDiv.appendChild(apptInfo);
 
         //create delete button for this appointment
