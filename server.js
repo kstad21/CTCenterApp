@@ -36,6 +36,7 @@ Notes:
 - x**x implement add appts endpoint x**x
 - x**x decide how to display appts on frontpage -- change the date stuff x**x
 - x**x add batches of appointments via 'add shift' functionality' x**x
+- validation for shift entry -- currently alert won't show up 
 - debateably add a check that appts have a valid tutor, course, etc 
 - display <today's> appts on the front page, add appt, search appt, appt schema, appt endpoint
 - ^ in this vein, make sure that tutors can have arrays of the appt schemas? and the course 
