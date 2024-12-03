@@ -80,19 +80,79 @@ document.addEventListener('DOMContentLoaded', () => {
                 appointmentInfo.push(formObj.endTime);
             }
 
+            const appointments = [];
+
+            for (let i = 5; i < appointmentInfo.length - 1; i++) {
+                const infoObj = {
+                    tutor: appointmentInfo[0],
+                    subject: appointmentInfo[1],
+                    date: appointmentInfo[2],
+                    mode: appointmentInfo[3],
+                    scholarAthlete: appointmentInfo[4],
+                    startTime: appointmentInfo[i],
+                    endTime: appointmentInfo[i + 1]
+                };
+
+                console.log("supposed to be validating infoObj: " + infoObj);
+        
+                const errors = validateForm(infoObj);
+                if (errors.length > 0) {
+                    console.log("there is an error");
+                    alert("Please correct the following errors: \n" + errors.join("\n"));
+                    return;
+                }
+
+                appointments.push(infoObj);
+            }
+
             console.log("final appointmentInfo: " + appointmentInfo);
-            addAppointments(appointmentInfo);
+            addAppointments(appointments);
         }
     });
 });
 
-function validateForm(formObj) {
+async function validateForm(formObj) {
     const errors = [];
 
     //if (tutors not in our list)
     //if subject not in our list
-    //if date is valid
-    //if time is in operating hours
+    //if date is invalid
+    const dateParts = formObj.date.split("/");
+    if (dateParts.length != 3) {
+        errors.push("Date must be in the form MM/DD/YYYY");
+    }
+    if (isNaN(parseInt(dateParts[0]))) {
+        errors.push("Please put month in number format (ex: November should be 11");
+    } else {
+        if (parseInt(dateParts[0] > 12)) {
+            errors.push("There are no months > 12.")
+        } else if (parseInt(dateParts[0] <= 0)) {
+            errors.push("There are no months <= 0.");
+        }
+    }
+    if (isNaN(parseInt(dateParts[1]))) {
+        errors.push("Please put day in number format (ex: 28 or 03");
+    } else {
+        if (parseInt(dateParts[1] > 31)) {
+            errors.push("There are no days > 31.")
+        } else if (parseInt(dateParts[1] <= 0)) {
+            errors.push("There are no days <= 0.");
+        }
+    }
+    if (isNaN(parseInt(dateParts[2]))) {
+        errors.push("Please put year in number format (ex: 2024 or 2003");
+    } 
+    
+    //if startTime is in operating hours
+    const startTimeParts = formObj.startTime.split(":");
+    if (startTimeParts.length != 2) {
+        errors.push("Start time must be in the form HH:MM (ex: 12:45).");
+    }
+    if (isNaN(parseInt(startTimeParts[0]) || isNaN(parseInt(startTimeParts[1])))) {
+        errors.push("Start time should be in number format, separated by a colon (ex: 12:45 or 13:30)");
+    } else if (parseInt(startTimeParts[0]) > 21) {
+        errors.push("No appointments past 9PM or 21:00.");
+    }
     //if time is in operating hours, and is after start
     let validMode = true;
     if ((formObj.mode).toLowerCase() !== "ip" && (formObj.mode).toLowerCase() !== "ol") {
@@ -160,22 +220,13 @@ function getNextStart(lastStart, duration) {
     return `${formattedHour}:${formattedMinute}`;
 }
 
-async function addAppointments(appointmentInfo, e) {
+async function addAppointments(appointments) {
     const formContainer = document.getElementById('add-appt-form-container');
     const form = formContainer.querySelector('form');
     const forms = formContainer.children;
 
-    for (let i = 5; i < appointmentInfo.length - 1; i++) {
-        const infoObj = {
-            tutor: appointmentInfo[0],
-            subject: appointmentInfo[1],
-            date: appointmentInfo[2],
-            mode: appointmentInfo[3],
-            scholarAthlete: appointmentInfo[4],
-            startTime: appointmentInfo[i],
-            endTime: appointmentInfo[i + 1]
-        };
-
+    for (let j = 0; j < appointments.length; j++) {
+        let infoObj = appointments[j];
         try {
             const response = await fetch("/api/appointments/add", {
                 method: "POST",

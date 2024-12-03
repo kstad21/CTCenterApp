@@ -191,7 +191,7 @@ function showTutorOverlay(tutor) {
         { label: 'Name', value: tutor.name, field:'name' },
         { label: 'Primary Subject', value:tutor.primSubj, field:'primSubj' },
         { label: 'Secondary Subject', value:tutor.secSubj, field:'secSubj' },
-        { label: 'Course', value:tutor.courses.join(', '), field:'courses' },
+        { label: 'Course', value:tutor.courses.map(course => course.name).join(', '), field:'courses' },
         { label: 'Email', value: tutor.email, field:'email' }
     ];
     const detailContainer = document.getElementById('overlay-tutor-details');
@@ -241,6 +241,7 @@ function showTutorOverlay(tutor) {
             detailText.textContent = `${detail.label}: ${newValue}`;
             tutor[detail.field] = newValue;
             form.style.display = 'none';
+            console.log("About to update tutor? ");
             updateTutor(tutor);
         });
 

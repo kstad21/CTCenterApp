@@ -102,11 +102,64 @@ router.delete('/remtutor', async (req, res) => {
 });
 
 router.put('/update', async (req, res) => {
-    const updatedTutor = req.body;
-    console.log("inside api, ", req.body);
+    const { _id, name, primSubj, secSubj, email, courses, observations } = req.body;
+
+    console.log("inside update tutor, req.body:, ", req.body);
 
     try {
-        await Tutor.updateOne({_id: updatedTutor._id}, updatedTutor);
+        console.log("inside try");
+        console.log("courses: ", courses);
+        
+        let courseNamesArray = [];
+
+        if (typeof courses === 'string') {
+            courseNamesArray = courses
+                .split(',')
+                .map(name => name.trim())
+                .filter(name => name !== "");
+        } else {
+            courseNamesArray = courses.map(course => course.name);
+        }
+        
+        console.log('past coursenamesarray');
+        
+        const courseIds = [];
+
+        console.log('right before for loop');
+        for (const courseName of courseNamesArray) {
+            console.log('cur coursename: ', courseName);
+            let course = await Course.findOne( {name: courseName });
+
+            if (!course) {
+                console.log('creating new course');
+                course = new Course({ name: courseName, subject: courseName.split(' ')[0], code: courseName.split(' ')[1] });
+                console.log('trying to save course');
+
+                try {
+                    await course.save();
+                    console.log('saved course');
+                } catch (error) {
+                    confirm("There was an error adding course with name: " + course.name);
+                }  
+            }
+
+            courseIds.push(course._id);
+        }
+
+        await Tutor.updateOne(
+            { _id }, // Filter by tutor ID
+            {
+                $set: {
+                    name: name,
+                    primSubj: primSubj,
+                    secSubj: secSubj,
+                    email: email,
+                    courses: courseIds,
+                    observations: observations
+                }
+            }
+        );
+
         res.status(200).json({ message: 'Tutor updated successfully!' });
     } catch (error) {
         res.status(500).json({ message: 'Failed to update tutor' });
