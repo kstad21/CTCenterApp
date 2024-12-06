@@ -1,7 +1,9 @@
 /* public/scripts/add-appt.js */
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', (e) => {
+    e.preventDefault();
     const formContainer = document.getElementById('add-appt-form-container');
+    console.log("HERE?");
     formContainer.addEventListener('submit', async (e) => {
         e.preventDefault();
 
@@ -17,33 +19,45 @@ document.addEventListener('DOMContentLoaded', () => {
             formObj[key] = value;
         });
 
-        const errors = validateForm(formObj);
+        console.log("formObj: ", formObj);
+
+        console.log("right before const errors = validate form");
+
+        /*const errors = validateForm(formObj);
         if (errors.length > 0) {
             alert("Please correct the following errors: \n" + errors.join("\n"));
             return;
-        }
+        }*/
 
         if (buttonId === "add-appt") {
+            console.log("HERE****");
             try {
-                const response = await fetch("/api/appointments/add", {
+                await fetch("/api/appointments/add", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify(formObj)
-                });
-    
-                if (response.ok) {
-                    alert("Appointment added/updated successfully!");
-    
-                    if (forms.length > 1) {
-                        formContainer.removeChild(form);
+                })
+                .then(response => response.json())
+                .then(responseData => {
+                    if (responseData.success) {
+                        alert("Appointment added/updated successfully!");
+        
+                        if (forms.length > 1) {
+                            formContainer.removeChild(form);
+                        } else {
+                            form.reset();
+                        }
                     } else {
-                        form.reset();
+                        const errors = responseData.errors;
+                        if (Array.isArray(errors)) {
+                            alert("Please correct:\n" + errors.join('\n'));
+                        }
                     }
-                } else {
-                    alert("Failed to add/update appointment.");
-                }
+                })
+    
+                
             } catch (error) {
                 console.error("Error in appt add", error);
                 alert("An error occured while adding/updating the appointment.");
@@ -94,13 +108,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 };
 
                 console.log("supposed to be validating infoObj: " + infoObj);
-        
-                const errors = validateForm(infoObj);
-                if (errors.length > 0) {
-                    console.log("there is an error");
-                    alert("Please correct the following errors: \n" + errors.join("\n"));
-                    return;
-                }
 
                 appointments.push(infoObj);
             }
@@ -110,80 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
-
-async function validateForm(formObj) {
-    const errors = [];
-
-    //if (tutors not in our list)
-    //if subject not in our list
-    //if date is invalid
-    const dateParts = formObj.date.split("/");
-    if (dateParts.length != 3) {
-        errors.push("Date must be in the form MM/DD/YYYY");
-    }
-    if (isNaN(parseInt(dateParts[0]))) {
-        errors.push("Please put month in number format (ex: November should be 11");
-    } else {
-        if (parseInt(dateParts[0] > 12)) {
-            errors.push("There are no months > 12.")
-        } else if (parseInt(dateParts[0] <= 0)) {
-            errors.push("There are no months <= 0.");
-        }
-    }
-    if (isNaN(parseInt(dateParts[1]))) {
-        errors.push("Please put day in number format (ex: 28 or 03");
-    } else {
-        if (parseInt(dateParts[1] > 31)) {
-            errors.push("There are no days > 31.")
-        } else if (parseInt(dateParts[1] <= 0)) {
-            errors.push("There are no days <= 0.");
-        }
-    }
-    if (isNaN(parseInt(dateParts[2]))) {
-        errors.push("Please put year in number format (ex: 2024 or 2003");
-    } 
-    
-    //if startTime is in operating hours
-    const startTimeParts = formObj.startTime.split(":");
-    if (startTimeParts.length != 2) {
-        errors.push("Start time must be in the form HH:MM (ex: 12:45).");
-    }
-    if (isNaN(parseInt(startTimeParts[0]) || isNaN(parseInt(startTimeParts[1])))) {
-        errors.push("Start time should be in number format, separated by a colon (ex: 12:45 or 13:30)");
-    } else if (parseInt(startTimeParts[0]) > 21) {
-        errors.push("No appointments past 9PM or 21:00.");
-    }
-    //if time is in operating hours, and is after start
-    let validMode = true;
-    if ((formObj.mode).toLowerCase() !== "ip" && (formObj.mode).toLowerCase() !== "ol") {
-        if ((formObj.mode).toLowerCase().includes("i")) {
-            formObj.mode = "IP";
-        } else if ((formObj.mode).toLowerCase().includes("o")) {
-            formObj.mode = "OL";
-        } else {
-            validMode = false;
-        }
-    }
-    if (!validMode) {
-        errors.push("Mode must be either IP or OL.");
-    }
-
-    let validScholarAthlete = true;
-    if ((formObj.scholarAthlete.toLowerCase() !== "y" && formObj.scholarAthlete.toLowerCase() !== "n")) {
-        if (formObj.scholarAthlete.toLowerCase() == "yes") {
-            formObj.scholarAthlete = "y";
-        } else if (formObj.scholarAthlete.toLowerCase() == "no") {
-            formObj.scholarAthlete = "n";
-        } else {
-            validScholarAthlete = false;
-        }
-    }
-    if (!validScholarAthlete) {
-        errors.push("Scholar athlete must be y or n.");
-    }
-
-    return errors;
-}
 
 function calcDurationNum(time1, time2) {
     const hour1 = time1.split(":")[0];
@@ -225,6 +158,8 @@ async function addAppointments(appointments) {
     const form = formContainer.querySelector('form');
     const forms = formContainer.children;
 
+    console.log("INSIDE ADDAPPOINTMENTS");
+
     for (let j = 0; j < appointments.length; j++) {
         let infoObj = appointments[j];
         try {
@@ -235,21 +170,32 @@ async function addAppointments(appointments) {
                 },
                 body: JSON.stringify(infoObj)
             });
-    
-            if (response.ok) {
+
+            const responseData = await response.json();
+
+            if (responseData.success) {
                 alert("Appointment added/updated successfully!");
-    
+        
                 if (forms.length > 1) {
                     formContainer.removeChild(form);
                 } else {
                     form.reset();
                 }
-            } else {
-                alert("Failed to add/update appointment.");
+            } else if (responseData.success === false) {
+                const errors = responseData.errors;
+                if (Array.isArray(errors)) {
+                    alert("Please correct: \n" + errors.join('\n'));
+                } else {
+                    alert("An error occurred: Unknown error");
+                }
+                // Stop processing further appointments
+                return;
             }
         } catch (error) {
             console.error("Error in appt add", error);
             alert("An error occurred while adding/updating the appointment.");
+            // Stop processing further appointments
+            return;
         }
     }
-};
+}

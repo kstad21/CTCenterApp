@@ -113,6 +113,7 @@ function displayTutors(tutors) {
 }
 
 function displayAppointments(appointments) {
+    console.log("INSIDE DISPLAYAPPTS?");
     const container = document.getElementById('appts-container');
     container.innerHTML = '';
 
