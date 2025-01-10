@@ -67,6 +67,16 @@
             <label for="scholarAthlete">Scholar Athlete? (y/n):</label>
             <input type="text" id="scholarAthlete" name="scholarAthlete">
 
+            <label for="days">Repeat days:</label>
+            <div id="repeat-days-container">
+                <button type="button" class="day-btn" data-day="mon">MON</button>
+                <button type="button" class="day-btn" data-day="tues">TUES</button>
+                <button type="button" class="day-btn" data-day="wed">WED</button>
+                <button type="button" class="day-btn" data-day="thurs">THURS</button>
+                <button type="button" class="day-btn" data-day="fri">FRI</button>
+                <button type="button" class="day-btn" data-day="sun">SUN</button>
+            </div>
+
             <button type="submit" id="add-appt">Add as appointment</button>
             <button type="submit" id="add-shift">Add as shift</button>
         </form>
@@ -98,6 +108,27 @@
                 const lastForm = forms[forms.length-1];
                 lastForm.remove();
             }
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const dayButtons = document.querySelectorAll(".day-btn");
+            const selectedDays = new Set();
+
+            dayButtons.forEach((button) => {
+                button.addEventListener("click", () => {
+                    const day = button.getAttribute("data-day");
+
+                    if (button.classList.contains("active")) {
+                        button.classList.remove("active");
+                        selectedDays.delete(day);
+                    } else {
+                        button.classList.add("active");
+                        selectedDays.add(day);
+                    }
+
+                    console.log(Array.from(selectedDays));
+                });
+            });
         });
     </script>
 </body>
