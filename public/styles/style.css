@@ -108,6 +108,10 @@
     margin-right: 2%;
 }
 
+#display-date, #frontpagelistappts {
+    width: 100%; /* Ensures these elements span full width */
+}
+
 #add-tutor-form-container, #add-appt-form-container {
     display:flex;
     flex-wrap: wrap;

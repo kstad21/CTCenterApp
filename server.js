@@ -37,6 +37,7 @@ Notes:
 - x**x decide how to display appts on frontpage -- change the date stuff x**x
 - x**x add batches of appointments via 'add shift' functionality' x**x
 - x**x validation for shift entry -- currently alert won't show up x**x
+- ***BUG*** -- add tutor add form, front page display tutors 
 - add a search/display option for appts -- dropdown for tutor, course, time, appt status (blocked, cancelled, scheduled, etc)
 - debateably add a check that appts have a valid tutor, course, etc 
 - display <today's> appts on the front page, add appt, search appt, appt schema, appt endpoint

@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // add a new form when add form button is clicked
-    document.getElementById("add-form-btn").addEventListener("click", () => {
+    document.getElementById("add-tutor-form-container-btn").addEventListener("click", () => {
         const newForm = document.createElement("form");
         newForm.innerHTML = `
             <label for="name">Name:</label><input type="text" name="name" required><br>
