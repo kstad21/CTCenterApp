@@ -46,15 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // add a new form when add form button is clicked
     document.getElementById("add-tutor-form-container-btn").addEventListener("click", () => {
-        /*const newForm = document.createElement("form");
-        newForm.innerHTML = `
-            <label for="name">Name:</label><input type="text" name="name" required><br>
-            <label for="primSubj">Primary Subject:</label><input type="text" name="primSubj" required><br>
-            <label for="secSubj">Secondary Subject:</label><input type="text" name="secSubj"><br>
-            <label for="email">Email:</label><input type="email" name="email"><br>
-            <label for="courses">Courses:</label><input type="text" name="courses"><br>
-            <button type="submit">Submit</button>
-        `;*/
         const newForm = document.getElementById('add-tutor-form').cloneNode(true);
         const inputs = newForm.querySelectorAll('input, select');
         inputs.forEach(input => input.value = '');

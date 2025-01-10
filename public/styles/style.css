@@ -1,18 +1,39 @@
 /* public/styles/style.css */
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+}
+
+/*for spacing btw sections*/
+#frontpagetitle, #frontpagelisttutors, #display-date, #frontpagelistappts {
+    margin-top: 20px;
+}
+
+/*spacing for containers*/
+#tutors-container, #appts-container {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
 .navbar {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    /*align-items: center;*/
     padding: 10px 20px;
     background-color: #333;
     color: white;
-}
-
-.navbar-left {
-    display: flex;
-    align-items: center;
-    gap: 20px;
 }
 
 .home-btn {
@@ -96,14 +117,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 30vh;
+    /*height: 30vh;*/
     text-align: center;
     margin-left: 2%;
     margin-right: 2%;
 }
 
 #frontpagelisttutors {
-    height: 50vh;
+    /*height: 50vh;*/
     margin-left: 2%;
     margin-right: 2%;
 }
