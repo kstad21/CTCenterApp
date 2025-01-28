@@ -9,7 +9,8 @@ const appointmentSchema = new mongoose.Schema({
     startTime: {type: String, required: true},
     endTime: {type: String, required:true},
     tutor: {type: String, required:true}, 
-    mode: {type: String, required:true}
+    mode: {type: String, required:true},
+    capacity: {type: Number, required:true}
 });
 
 //create model based on schema

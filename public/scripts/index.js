@@ -280,7 +280,7 @@ function updateTutor(tutor) {
 }
 
 function showAppointmentOverlay(appointment) {
-    document.getElementById('overlay-appt-start-end').textContent = `${(parseDate(appointment.startTime)).split(" (")[0]}-${((parseDate(appointment.endTime)).split(" (")[0]).split(": ")[1]}`;
+    document.getElementById('overlay-appt-start-end').textContent = `${(parseDate(appointment.startTime)).split(" (")[0]}-${((parseDate(appointment.endTime)).split(" (")[0]).split(": ")[1]} | Capacity: ${appointment.capacity}`;
     document.getElementById('overlay-appt-details').innerHTML = `
         <p>Tutor: ${appointment.tutor}</p>
         <p>Subject: ${appointment.subject}</p>

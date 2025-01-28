@@ -24,7 +24,7 @@ router.post('/add', async (req, res) => {
 
     try {
         console.log("inside try inside addappointments");
-        const { tutor, subject, date, startTime, endTime, mode, scholarAthlete } = req.body;
+        const { tutor, subject, date, startTime, endTime, mode, scholarAthlete, capacity } = req.body;
 
         const existingAppt = await Appointment.findOne( {tutor: new RegExp(`^${tutor}$`, 'i'), date: date, startTime: startTime });
         if (existingAppt) {
@@ -40,7 +40,8 @@ router.post('/add', async (req, res) => {
             startTime: startTime, 
             endTime: endTime,
             mode: mode,
-            scholarAthlete: scholarAthlete
+            scholarAthlete: scholarAthlete,
+            capacity: capacity
         });
 
         const savedAppt = await newAppt.save();

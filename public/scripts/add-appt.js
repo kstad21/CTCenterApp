@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // validate form info 
         const validatedData = validateApptForm(form);
+        var valid = true;
         for (const key in validatedData) {
             if (validatedData.hasOwnProperty(key)) {
                 const element = validatedData[key];
@@ -53,8 +54,13 @@ document.addEventListener('DOMContentLoaded', () => {
         
                 if (typeof element === "string" && element.includes("!")) {
                     alert("Invalid form submission: " + element.split("!")[1] + ", please edit.");
+                    valid = false;
                 }
             }
+        }
+
+        if (!valid) {
+            return;
         }
 
         // get appt info based on repeat days and validated data
@@ -256,6 +262,11 @@ function getRepeatDates(selectedDays, startDate, endDate) {
         console.error("Error in converting dates in getRepeatDates ", error);
     }
 
+    if (startDate.getTime() == endDate.getTime()) {
+        dates.push(startDate);
+        return dates;
+    }
+
     var currDate = start;
     while (currDate <= end) {
         console.log('curr date: ' + currDate.toString());
@@ -288,6 +299,7 @@ function getApptInfo(repeatDaysContainer, validatedData, isShift) {
     const selectedDays = getDays(repeatDaysContainer);
 
     const dateForAppts = getRepeatDates(selectedDays, validatedData.startDate, validatedData.endDate);
+    console.log("date for appts: ", dateForAppts);
     
     const startTime = validatedData.startTime;
     const endTime = validatedData.endTime;
@@ -310,6 +322,10 @@ function getApptInfo(repeatDaysContainer, validatedData, isShift) {
                 } else {
                     end = shiftStarts[j+1];
                 }
+                var capacity = 1;
+                if (calcNumericalDuration(currStart, end) > 0.5) {
+                    capacity = 2;
+                }
     
                 var currApptObj = {
                     tutor: tutor,
@@ -318,11 +334,17 @@ function getApptInfo(repeatDaysContainer, validatedData, isShift) {
                     mode: mode,
                     scholarAthlete: scholarAthlete,
                     startTime: currStart,
-                    endTime: end
+                    endTime: end,
+                    capacity: capacity
                 };
                 apptInfo.push(currApptObj);
             }
         } else {
+            var capacity = 1;
+            if (calcNumericalDuration(startTime, endTime) > 0.5) {
+                capacity = 2;
+            }
+
             var currApptObj = {
                 tutor: tutor,
                 subject: subject,
@@ -330,7 +352,8 @@ function getApptInfo(repeatDaysContainer, validatedData, isShift) {
                 mode: mode,
                 scholarAthlete: scholarAthlete,
                 startTime: startTime,
-                endTime: endTime
+                endTime: endTime,
+                capacity: capacity
             };
             apptInfo.push(currApptObj);
         }
@@ -383,18 +406,22 @@ function getStartsForShift(startTime, endTime) {
  */
 function toDate(dateStr) {
     console.log("inside of toDate: ", dateStr);
-    const parts = dateStr.split('/');
-    if (parts.length!= 3) {
-        throw new Error('Invalid date format! Expected MM/DD/YYYY.');
+    if (typeof dateStr === "string") {
+        const parts = dateStr.split('/');
+        if (parts.length!= 3) {
+            throw new Error('Invalid date format! Expected MM/DD/YYYY.');
+        }
+
+        const [month, day, year] = parts.map(part => parseInt(part, 10));
+
+        if (isNaN(month) || isNaN(day) || isNaN(year) || month < 1 || month > 12 || day > 31 || day < 1) {
+            throw new Error('Invalid date value!');
+        }
+
+        return new Date(year, month - 1, day);
+    } else {
+        return dateStr;
     }
-
-    const [month, day, year] = parts.map(part => parseInt(part, 10));
-
-    if (isNaN(month) || isNaN(day) || isNaN(year) || month < 1 || month > 12 || day > 31 || day < 1) {
-        throw new Error('Invalid date value!');
-    }
-
-    return new Date(year, month - 1, day);
 }
 
 /**

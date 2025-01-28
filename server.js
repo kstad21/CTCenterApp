@@ -39,8 +39,8 @@ Notes:
 - x**x validation for shift entry -- currently alert won't show up x**x
 - x**x ***BUG*** -- add tutor add form x**x
 - x**x front page display tutors x**x
-- add appt doesn't give notification that was added successfully? 
-- allow for recurring appts -- MON TUES WED THURS FRI SUN options 
+- x**x add appt doesn't give notification that was added successfully? x**x
+- x**x allow for recurring appts -- MON TUES WED THURS FRI SUN options x**x
 - now, if deleting appts need to determine: delete THIS, delete ALL, delete this + FOLLOWING?
 - add a search/display option for appts -- dropdown for tutor, course, time, appt status (blocked, cancelled, scheduled, etc)
 - debateably add a check that appts have a valid tutor, course, etc 
