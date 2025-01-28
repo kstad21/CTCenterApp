@@ -41,6 +41,7 @@ Notes:
 - x**x front page display tutors x**x
 - x**x add appt doesn't give notification that was added successfully? x**x
 - x**x allow for recurring appts -- MON TUES WED THURS FRI SUN options x**x
+- alert if startDate != endDate but no days were chosen to repeat?? Or nah 
 - now, if deleting appts need to determine: delete THIS, delete ALL, delete this + FOLLOWING?
 - add a search/display option for appts -- dropdown for tutor, course, time, appt status (blocked, cancelled, scheduled, etc)
 - debateably add a check that appts have a valid tutor, course, etc 
