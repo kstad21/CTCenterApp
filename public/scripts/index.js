@@ -129,7 +129,7 @@ function displayAppointments(appointments) {
 
         const apptInfo = document.createElement('span');
         //apptInfo.textContent = `Tutor: ${appt.tutor} | Subject: ${appt.subject} | ${(parseDate(appt.startTime)).split(" (")[0]}-${((parseDate(appt.endTime)).split(" (")[0]).split(": ")[1]} | Mode: ${appt.mode}`;
-        apptInfo.textContent = `Tutor: ${appt.tutor} | Subject: ${appt.subject} | ${parseDate(appt.startTime.toString())}-${parseDate(appt.endTime.toString())} | Mode: ${appt.mode}`;
+        apptInfo.textContent = `Tutor: ${appt.tutor} | Subject: ${appt.subject} | Date: ${appt.date.split("T")[0]} | ${appt.startTime}-${appt.endTime} | Mode: ${appt.mode}`;
         appointmentDiv.appendChild(apptInfo);
 
         //create delete button for this appointment

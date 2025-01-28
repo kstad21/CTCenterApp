@@ -27,6 +27,7 @@ body {
     border-radius: 5px;
 }
 
+/*navbar*/
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -63,42 +64,34 @@ body {
     border: none;
     border-radius: 5px;
 }
+/*end navbar*/
 
-.dropdown-left {
-    display: flex;
-    align-items: left;
-}
-
+/*dropdowns*/
 .dropdown {
-    align-self: center;
-    margin: auto 0;
+    position: relative;
+    display: inline-block;
 }
 
 .dropdown-btn {
-    background-color:rgb(61, 77, 255);
-    min-width: 40px;
-    max-width: 200px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipses;
+    background-color: #4949c8;
     color: white;
-    padding: 10px;
-    font-size: 14px;
+    padding: 10px 20px;
     border: none;
     cursor: pointer;
     border-radius: 5px;
 }
 
 .dropdown-content {
-    display: none; /*hide by default*/
-    position: absolute; 
+    display: none; /* Hidden by default */
+    position: absolute;
     background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
     min-width: 160px;
-    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-    z-index:1;
+    border-radius: 5px;
 }
 
-.dropdown-content a{
+.dropdown-content a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
@@ -106,33 +99,84 @@ body {
 }
 
 .dropdown-content a:hover {
-    background-color: #f1f1f1;
+    background-color: #ddd;
 }
 
+/* Show Dropdown on Hover */
 .dropdown:hover .dropdown-content {
     display: block;
 }
 
+/* Left-aligned Sub Dropdown */
+.dropdown-left {
+    position: relative;
+}
+
+.dropdown-left .dropdown-content {
+    display: none;
+    position: absolute;
+    left: -100%; /* Align the dropdown to the left of its parent */
+    top: 0;
+    z-index: 2;
+}
+
+.dropdown-left:hover .dropdown-content {
+    display: block;
+}
+/*end dropdown*/
+
+/*front page sections*/
 #frontpagetitle {
     display: flex;
     justify-content: center;
     align-items: center;
-    /*height: 30vh;*/
     text-align: center;
     margin-left: 2%;
     margin-right: 2%;
 }
 
 #frontpagelisttutors {
-    /*height: 50vh;*/
     margin-left: 2%;
     margin-right: 2%;
+}
+
+#tutor-display-header {
+    display: flex;
+    justify-content: space-between;
 }
 
 #display-date, #frontpagelistappts {
     width: 100%; /* Ensures these elements span full width */
 }
 
+#tutors-container, #courses-container, #appts-container {
+    cursor: pointer;
+}
+
+#days-container {
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.day-btn {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.day-btn.selected {
+    background-color: #4caf50; /* Green for active state */
+    color: white;
+    border-color: #4caf50;
+}
+/*end front page sections*/
+
+/*add-forms*/
 #add-tutor-form-container, #add-appt-form-container {
     display:flex;
     flex-wrap: wrap;
@@ -171,7 +215,9 @@ input {
 label {
     padding: 1px;
 }
+/*end add-forms*/
 
+/*overlays*/
 .overlay {
     position: fixed;
     top: 0;
@@ -213,29 +259,5 @@ label {
     color: rgb(127, 127, 127);
     cursor: pointer;
 }
+/*end overlays*/
 
-#tutors-container, #courses-container, #appts-container {
-    cursor: pointer;
-}
-
-#days-container {
-    display: flex;
-    gap: 5px;
-    margin-top: 10px;
-}
-
-.day-btn {
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.day-btn.active {
-    background-color: #4caf50; /* Green for active state */
-    color: white;
-    border-color: #4caf50;
-}

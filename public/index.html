@@ -35,7 +35,36 @@
     </nav>
     <h1 id="frontpagetitle">Welcome to the CT Center</h1>
     <div id="frontpagelisttutors">
-        <h2>List of Tutors</h2>
+        <div id="tutor-display-header">
+            <h2>List of Tutors</h2>
+            <div class="dropdown">
+                <button class="dropdown-btn">Sort By ▼</button>
+                <div class="dropdown-content">
+                    <button id="sort-tutor-first-name">First Name</button>
+                    <button id="sort-tutor-last-name">Last Name</button>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropdown-btn">Filter By ▼</button>
+                <div class="dropdown-content">
+                    <div class="dropdown dropdown-left">
+                        <button class="dropdown-btn" id="subject-filter-btn">Subject ▼</button>
+                        <div class="dropdown-content">
+                            <button id="filter-tutor-math">MATH</button>
+                            <button id="filter-tutor-ochem">CHEM (O)</button>
+                            <button id="filter-tutor-genchem">CHEM (GEN)</button>
+                            <button id="filter-tutor-bio">BIO</button>
+                            <button id="filter-tutor-physics">PHYS</button>
+                            <button id="filter-tutor-econ">ECON</button>
+                        </div>
+                    </div>
+                    <form>
+                        <label for="tutor-filter-course">Course (eg MATH 10B):</label>
+                        <input type="text" id="tutor-filter-course" name="course"><br>
+                    </form>
+                </div>
+            </div>
+        </div>
         <div id="tutors-container"></div>
     </div>
     <div id="tutor-overlay" class="overlay">
